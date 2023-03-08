@@ -6,8 +6,11 @@ import (
 	"net/http"
 )
 
-func Get() ([]User, error) {
-	c := http.DefaultClient
+type clienter interface {
+	Do(req *http.Request) (*http.Response, error)
+}
+
+func Get(c clienter) ([]User, error) {
 	req, err := http.NewRequest(http.MethodGet, "https://jsonplaceholder.typicode.com/users", nil)
 	if err != nil {
 		return nil, err
