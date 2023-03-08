@@ -7,8 +7,13 @@ import (
 )
 
 func Get() ([]User, error) {
-	res, err := http.Get("https://jsonplaceholder.typicode.com/users")
+	c := http.DefaultClient
+	req, err := http.NewRequest(http.MethodGet, "https://jsonplaceholder.typicode.com/users", nil)
+	if err != nil {
+		return nil, err
+	}
 
+	res, err := c.Do(req)
 	if err != nil {
 		return nil, err
 	}
@@ -19,7 +24,6 @@ func Get() ([]User, error) {
 	}
 
 	var u []User
-
 	err = json.Unmarshal(b, &u)
 
 	return u, err
