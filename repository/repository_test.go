@@ -5,7 +5,6 @@ import (
 	"testing"
 
 	"github.com/pradist/user/domain"
-	"github.com/pradist/user/repository"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -21,26 +20,23 @@ func NewAddDomainFakeRepository() *addDomainFakeRepository {
 	return &addDomainFakeRepository{}
 }
 
-func TestAddUserInMemory(t *testing.T) {
-	r := NewAddDomainFakeRepository()
-	r.MockAdd = func(user domain.User) error {
+func TestAddMemory(t *testing.T) {
+	repo := NewAddDomainFakeRepository()
+	repo.MockAdd = func(user domain.User) error {
 		return nil
 	}
 
-	sut := repository.NewAddUserInMemory(r)
-	err := sut.Save(domain.User{})
+	err := repo.Add(domain.User{})
 	assert.NoError(t, err)
 }
 
-func TestAddUserInMemoryWithRepositoryError(t *testing.T) {
-	r := NewAddDomainFakeRepository()
-	r.MockAdd = func(user domain.User) error {
-		return errors.New("ErrUserAlreadyExists")
+func TestAddMemoryWithErr(t *testing.T) {
+	repo := NewAddDomainFakeRepository()
+	repo.MockAdd = func(user domain.User) error {
+		return errors.New("some error")
 	}
 
-	sut := repository.NewAddUserInMemory(r)
-	err := sut.Save(domain.User{})
-
+	err := repo.Add(domain.User{})
 	assert.Error(t, err)
-	assert.EqualError(t, err, "ErrUserAlreadyExists")
+	assert.EqualError(t, err, "some error")
 }

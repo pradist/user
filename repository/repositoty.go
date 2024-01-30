@@ -8,14 +8,12 @@ type AddInMemoryRepository interface {
 	Add(domain.User) error
 }
 
-type AddUserInMemory struct {
-	repository AddInMemoryRepository
+type addInMemoryRepository struct{}
+
+func NewAddInMemoryRepository() AddInMemoryRepository {
+	return &addInMemoryRepository{}
 }
 
-func (a *AddUserInMemory) Save(user domain.User) error {
-	return a.repository.Add(user)
-}
-
-func NewAddUserInMemory(repository AddInMemoryRepository) *AddUserInMemory {
-	return &AddUserInMemory{repository: repository}
+func (repo *addInMemoryRepository) Add(user domain.User) error {
+	return nil
 }
