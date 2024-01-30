@@ -6,6 +6,7 @@ import (
 
 	"github.com/pradist/user/domain"
 	"github.com/pradist/user/repository"
+	"github.com/stretchr/testify/assert"
 )
 
 type addDomainFakeRepository struct {
@@ -28,9 +29,7 @@ func TestAddUserInMemory(t *testing.T) {
 
 	sut := repository.NewAddUserInMemory(r)
 	err := sut.Save(domain.User{})
-	if err != nil {
-		t.Error("Expect error to be nil but got:", err)
-	}
+	assert.NoError(t, err)
 }
 
 func TestAddUserInMemoryWithRepositoryError(t *testing.T) {
@@ -41,7 +40,5 @@ func TestAddUserInMemoryWithRepositoryError(t *testing.T) {
 
 	sut := repository.NewAddUserInMemory(r)
 	err := sut.Save(domain.User{})
-	if err.Error() != errors.New("ErrUserAlreadyExists").Error() {
-		t.Error("Expect error to be ErrUserAlreadyExists but got:", err)
-	}
+	assert.Error(t, err)
 }

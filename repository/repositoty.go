@@ -1,8 +1,12 @@
 package repository
 
 import (
+	"errors"
+
 	"github.com/pradist/user/domain"
 )
+
+var ErrUserAlreadyExists = errors.New("ErrUserAlreadyExists")
 
 type AddInMemoryRepository interface {
 	Add(domain.User) error
