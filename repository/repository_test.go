@@ -40,5 +40,7 @@ func TestAddUserInMemoryWithRepositoryError(t *testing.T) {
 
 	sut := repository.NewAddUserInMemory(r)
 	err := sut.Save(domain.User{})
+
 	assert.Error(t, err)
+	assert.EqualError(t, err, "ErrUserAlreadyExists")
 }
