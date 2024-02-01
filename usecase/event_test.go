@@ -5,6 +5,7 @@ import (
 
 	"github.com/pradist/user/domain"
 	"github.com/pradist/user/usecase"
+	"github.com/stretchr/testify/assert"
 )
 
 type addEventFakeRepository struct {
@@ -26,7 +27,5 @@ func TestAddEventInMemorySucceed(t *testing.T) {
 	sut := usecase.NewAddEventInMemory(r)
 
 	err := sut.Save(domain.Event{})
-	if err != nil {
-		t.Error("Expect error to be nil but got:", err)
-	}
+	assert.Nil(t, err)
 }

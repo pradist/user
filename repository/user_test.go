@@ -5,6 +5,7 @@ import (
 
 	"github.com/pradist/user/domain"
 	"github.com/pradist/user/repository"
+	"github.com/stretchr/testify/assert"
 )
 
 type UserInMemoryMockRepository struct {
@@ -26,7 +27,5 @@ func TestGetUserInMemorySucceed(t *testing.T) {
 	sut := repository.NewUserInMemoryRepository(r)
 
 	_, err := sut.Get()
-	if err != nil {
-		t.Error("Expect error to be nil but got:", err)
-	}
+	assert.Nil(t, err)
 }
