@@ -7,23 +7,23 @@ import (
 	"github.com/pradist/user/repository"
 )
 
-type InMemoryMockRepository struct {
+type UserInMemoryMockRepository struct {
 	MockGetFn func() ([]domain.User, error)
 }
 
-func (fake *InMemoryMockRepository) Get() ([]domain.User, error) {
+func (fake *UserInMemoryMockRepository) Get() ([]domain.User, error) {
 	return fake.MockGetFn()
 }
 
-func newInMemoryMockRepository() *InMemoryMockRepository {
-	return &InMemoryMockRepository{
+func newUserInMemoryMockRepository() *UserInMemoryMockRepository {
+	return &UserInMemoryMockRepository{
 		MockGetFn: func() ([]domain.User, error) { return nil, nil },
 	}
 }
 
 func TestGetUserInMemorySucceed(t *testing.T) {
-	r := newInMemoryMockRepository()
-	sut := repository.NewInMemoryUser(r)
+	r := newUserInMemoryMockRepository()
+	sut := repository.NewUserInMemoryRepository(r)
 
 	_, err := sut.Get()
 	if err != nil {

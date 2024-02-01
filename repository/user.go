@@ -2,19 +2,19 @@ package repository
 
 import "github.com/pradist/user/domain"
 
-type InMemoryRepository interface {
+type UserInMemoryRepository interface {
 	Get() ([]domain.User, error)
 }
 
-type InMemoryUser struct {
-	repository InMemoryRepository
+type UserInMemory struct {
+	repository UserInMemoryRepository
 }
 
-func (usecase *InMemoryUser) Get() ([]domain.User, error) {
+func (usecase *UserInMemory) Get() ([]domain.User, error) {
 	users, err := usecase.repository.Get()
 	return users, err
 }
 
-func NewInMemoryUser(r InMemoryRepository) *InMemoryUser {
-	return &InMemoryUser{repository: r}
+func NewUserInMemoryRepository(r UserInMemoryRepository) *UserInMemory {
+	return &UserInMemory{repository: r}
 }
