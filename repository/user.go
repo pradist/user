@@ -2,6 +2,11 @@ package repository
 
 import "github.com/pradist/user/domain"
 
+var users = []domain.User{
+	{ID: 1, Name: "John"},
+	{ID: 2, Name: "Doe"},
+}
+
 type UserInMemoryRepository interface {
 	Get() ([]domain.User, error)
 }
@@ -11,8 +16,7 @@ type UserInMemory struct {
 }
 
 func (usecase *UserInMemory) Get() ([]domain.User, error) {
-	users, err := usecase.repository.Get()
-	return users, err
+	return users, nil
 }
 
 func NewUserInMemoryRepository(r UserInMemoryRepository) *UserInMemory {
