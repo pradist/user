@@ -9,6 +9,7 @@ var users = []domain.User{
 
 type UserInMemoryRepository interface {
 	Get() ([]domain.User, error)
+	Save(domain.User) error
 }
 
 type UserInMemory struct {
@@ -17,6 +18,11 @@ type UserInMemory struct {
 
 func (usecase *UserInMemory) Get() ([]domain.User, error) {
 	return users, nil
+}
+
+func (usecase *UserInMemory) Save(u domain.User) error {
+	users = append(users, u)
+	return nil
 }
 
 func NewUserInMemoryRepository(r UserInMemoryRepository) *UserInMemory {
