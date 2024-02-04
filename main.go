@@ -12,13 +12,18 @@ func main() {
 	r := repository.NewUserInMemoryRepository(nil)
 	users, _ := r.Get()
 
-	fmt.Printf("%v\n", users)
+	fmt.Printf("get all %v\n", users)
 
 	u := domain.User{ID: 3, Name: "Jane"}
 
 	r.Save(u)
 
 	users, _ = r.Get()
+	fmt.Printf("after save %v\n", users)
 
-	fmt.Printf("%v\n", users)
+	r.Update(domain.User{ID: 3, Name: "Jane Doe"})
+
+	users, _ = r.Get()
+
+	fmt.Printf("after update %v\n", users)
 }
