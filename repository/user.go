@@ -1,6 +1,10 @@
 package repository
 
-import "github.com/pradist/user/domain"
+import (
+	"errors"
+
+	"github.com/pradist/user/domain"
+)
 
 var users = []domain.User{
 	{ID: 1, Name: "John"},
@@ -33,7 +37,7 @@ func (usecase *UserInMemory) Update(u domain.User) error {
 			return nil
 		}
 	}
-	return nil
+	return errors.New("user not found")
 }
 
 func NewUserInMemoryRepository(r UserInMemoryRepository) *UserInMemory {

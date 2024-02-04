@@ -57,3 +57,11 @@ func TestUpdateUserInMemorySucceed(t *testing.T) {
 	err := sut.Update(domain.User{})
 	assert.Nil(t, err)
 }
+
+func TestUpdateUserInMemoryFail(t *testing.T) {
+	r := newUserInMemoryMockRepository()
+	sut := repository.NewUserInMemoryRepository(r)
+
+	err := sut.Update(domain.User{ID: 99})
+	assert.NotNil(t, err)
+}
