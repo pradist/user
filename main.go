@@ -15,6 +15,7 @@ func main() {
 	fmt.Printf("%v\n", users)
 
 	u := domain.User{ID: 3, Name: "Jane"}
+
 	r.Save(u)
 
 	users, _ = r.Get()

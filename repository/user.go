@@ -10,6 +10,7 @@ var users = []domain.User{
 type UserInMemoryRepository interface {
 	Get() ([]domain.User, error)
 	Save(domain.User) error
+	Update(domain.User) error
 }
 
 type UserInMemory struct {
@@ -22,6 +23,16 @@ func (usecase *UserInMemory) Get() ([]domain.User, error) {
 
 func (usecase *UserInMemory) Save(u domain.User) error {
 	users = append(users, u)
+	return nil
+}
+
+func (usecase *UserInMemory) Update(u domain.User) error {
+	for i, user := range users {
+		if user.ID == u.ID {
+			users[i] = u
+			return nil
+		}
+	}
 	return nil
 }
 
