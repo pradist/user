@@ -79,3 +79,11 @@ func TestDeleteUserInMemorySucceed(t *testing.T) {
 	err := sut.Delete(1)
 	assert.Nil(t, err)
 }
+
+func TestDeleteUserInMemoryFail(t *testing.T) {
+	r := newUserInMemoryMockRepository()
+	sut := repository.NewUserInMemoryRepository(r)
+
+	err := sut.Delete(99)
+	assert.NotNil(t, err)
+}
