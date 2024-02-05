@@ -12,6 +12,7 @@ type UserInMemoryMockRepository struct {
 	MockGetFn    func() ([]domain.User, error)
 	MockSaveFn   func(domain.User) error
 	MockUpdateFn func(domain.User) error
+	MockDeleteFn func(int) error
 }
 
 func (fake *UserInMemoryMockRepository) Get() ([]domain.User, error) {
@@ -26,11 +27,16 @@ func (fake *UserInMemoryMockRepository) Update(user domain.User) error {
 	return fake.MockUpdateFn(user)
 }
 
+func (fake *UserInMemoryMockRepository) Delete(id int) error {
+	return fake.MockDeleteFn(id)
+}
+
 func newUserInMemoryMockRepository() *UserInMemoryMockRepository {
 	return &UserInMemoryMockRepository{
 		MockGetFn:    func() ([]domain.User, error) { return nil, nil },
 		MockSaveFn:   func(user domain.User) error { return nil },
 		MockUpdateFn: func(user domain.User) error { return nil },
+		MockDeleteFn: func(id int) error { return nil },
 	}
 }
 
@@ -64,4 +70,12 @@ func TestUpdateUserInMemoryFail(t *testing.T) {
 
 	err := sut.Update(domain.User{ID: 99})
 	assert.NotNil(t, err)
+}
+
+func TestDeleteUserInMemorySucceed(t *testing.T) {
+	r := newUserInMemoryMockRepository()
+	sut := repository.NewUserInMemoryRepository(r)
+
+	err := sut.Delete(1)
+	assert.Nil(t, err)
 }

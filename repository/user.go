@@ -40,6 +40,16 @@ func (usecase *UserInMemory) Update(u domain.User) error {
 	return errors.New("user not found")
 }
 
+func (usecase *UserInMemory) Delete(id int) error {
+	for i, user := range users {
+		if user.ID == id {
+			users = append(users[:i], users[i+1:]...)
+			return nil
+		}
+	}
+	return errors.New("user not found")
+}
+
 func NewUserInMemoryRepository(r UserInMemoryRepository) *UserInMemory {
 	return &UserInMemory{repository: r}
 }
