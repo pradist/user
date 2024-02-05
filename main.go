@@ -26,4 +26,9 @@ func main() {
 	users, _ = r.Get()
 
 	fmt.Printf("after update %v\n", users)
+
+	r.Delete(3)
+
+	users, _ = r.Get()
+	fmt.Printf("after delete %v\n", users)
 }
