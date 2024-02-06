@@ -28,4 +28,5 @@ func TestAddEventInMemorySucceed(t *testing.T) {
 
 	err := sut.Save(domain.Event{})
 	assert.Nil(t, err)
+
 }
