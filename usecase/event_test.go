@@ -27,6 +27,6 @@ func TestAddEventInMemorySucceed(t *testing.T) {
 	sut := usecase.NewAddEventInMemory(r)
 
 	err := sut.Save(domain.Event{})
-	assert.Nil(t, err)
 
+	assert.Nil(t, err)
 }
