@@ -45,6 +45,7 @@ func TestGetUserInMemorySucceed(t *testing.T) {
 	sut := repository.NewUserInMemoryRepository(r)
 
 	_, err := sut.Get()
+
 	assert.Nil(t, err)
 }
 
@@ -53,6 +54,7 @@ func TestSaveUserInMemorySucceed(t *testing.T) {
 	sut := repository.NewUserInMemoryRepository(r)
 
 	err := sut.Save(domain.User{})
+
 	assert.Nil(t, err)
 }
 
@@ -61,6 +63,7 @@ func TestUpdateUserInMemorySucceed(t *testing.T) {
 	sut := repository.NewUserInMemoryRepository(r)
 
 	err := sut.Update(domain.User{})
+
 	assert.Nil(t, err)
 }
 
@@ -69,6 +72,7 @@ func TestUpdateUserInMemoryFail(t *testing.T) {
 	sut := repository.NewUserInMemoryRepository(r)
 
 	err := sut.Update(domain.User{ID: 99})
+
 	assert.NotNil(t, err)
 }
 
@@ -77,6 +81,7 @@ func TestDeleteUserInMemorySucceed(t *testing.T) {
 	sut := repository.NewUserInMemoryRepository(r)
 
 	err := sut.Delete(1)
+
 	assert.Nil(t, err)
 }
 
@@ -85,5 +90,6 @@ func TestDeleteUserInMemoryFail(t *testing.T) {
 	sut := repository.NewUserInMemoryRepository(r)
 
 	err := sut.Delete(99)
+
 	assert.NotNil(t, err)
 }
