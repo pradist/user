@@ -18,7 +18,9 @@ func (fake *addEventFakeRepository) Add(e domain.Event) error {
 
 func newAddEventFakeRepository() *addEventFakeRepository {
 	return &addEventFakeRepository{
-		MockAddFn: func(e domain.Event) error { return nil },
+		MockAddFn: func(e domain.Event) error { 
+    return nil 
+  },
 	}
 }
 
